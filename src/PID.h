@@ -1,6 +1,7 @@
 #ifndef PID_H
 #define PID_H
-
+#include <iostream>
+using namespace std;
 class PID {
  public:
   /**
@@ -35,16 +36,26 @@ class PID {
   /**
    * PID Errors
    */
+  // cte directly * tau_p
   double p_error;
+  // i_error should be a sum of cte * tau_i
   double i_error;
+  // diff of cte from i-1 -> i * tau_d
   double d_error;
+  // store previous cte
+  double prev_cte;
+  // store total cte
+  double total_cte;
+
+  // check whether first time
+  bool first_time;
 
   /**
-   * PID Coefficients
+   * PID tau values
    */ 
-  double Kp;
-  double Ki;
-  double Kd;
+  double tau_p;
+  double tau_i;
+  double tau_d;
 };
 
 #endif  // PID_H
